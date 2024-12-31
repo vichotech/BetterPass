@@ -13,7 +13,8 @@ const specialChars = "¡!\"#$%&'()*+,-./:;<=>¿?@[\\]^_`{}~".split("");
 const chars = lowerChars.concat(upperChars, numbersChars, specialChars);
 
 let numberOfPass = 1;
-let length = 8;
+let maxLength = 8;
+let currentLength = 0;
 let password = "";
 
 let hasUpper = true;
@@ -22,13 +23,14 @@ let hasNumbers = true;
 let hasSpecial = true;
 
 let firstChar = "";
+let lastChar = "";
 
 /* EVENTS
 ================================================================= */
 window.addEventListener("load", () => {
     showBg();
     resetSettings();
-    updateFirstCharSelect();
+    updateCharSelects();
 });
 
 genBtn.addEventListener("click", () => {
@@ -64,6 +66,12 @@ function check(charArray) {
         firstChar = "";
         fakeLabel.innerText = "None";
         firstRadio.checked = true;
+    } else if (charArray.some((char) => char === lastChar)) {
+        lastChar = "";
+        lastCharFakeLabel.innerText = "None";
+        lastCharFirstRadio.checked = true;
+    } else {
+        return;
     }
 };
 
@@ -96,27 +104,54 @@ function genPassword() {
     passChars = passChars.concat(bindingChars);
 
     // Evaluate if there is any first chars defined
-    if (!firstChar == "") {
-        password = firstChar;
-        // Concatenate the rest of 'password' characters up to its max. length
-        for (let i = bindingChars.length; i < length - 1; i++) {
+    if (firstChar) {
+        if (lastChar) {
+            // password = firstChar + lastChar;
+            currentLength = 2;
+        } else {
+            // password = firstChar;
+            currentLength = 1;
+            // Concatenate the rest of 'password' characters up to its max. length
+            /* for (let i = bindingChars.length; i < maxLength - 1; i++) {
+                let index = Math.floor(Math.random() * allChars.length);
+                passChars.push(allChars[index]);
+            } */
+        }
+    } else if (lastChar) {
+        // password = lastChar;
+        currentLength = 1;
+        /* for (let i = bindingChars.length; i < maxLength - 1; i++) {
             let index = Math.floor(Math.random() * allChars.length);
             passChars.push(allChars[index]);
-        }
+        } */
     } else {
-        password = "";
-        // Concatenate the rest of 'password' characters up to its max. length
-        for (let i = bindingChars.length; i < length; i++) {
+        // password = "";
+        currentLength = 0;
+        /* for (let i = bindingChars.length; i < maxLength; i++) {
             let index = Math.floor(Math.random() * allChars.length);
             passChars = passChars.concat(allChars[index]);
-        }
+        } */
     };
+
+    // Concatenate the rest of 'password' characters up to its max. length
+    for (let i = bindingChars.length; i < maxLength - currentLength; i++) {
+        let index = Math.floor(Math.random() * allChars.length);
+        passChars.push(allChars[index]);
+    }
+
+    //console.log(bindingChars, passChars);
+
+    //password = firstChar + passChars.join('') + lastChar;
+
+    let tempPassword = '';
 
     while (passChars.length > 0) {
         let index = Math.floor(Math.random() * passChars.length);
-        password += passChars[index];
+        tempPassword += passChars[index];
         passChars.splice(index, 1);
     }
+
+    password = firstChar + tempPassword + lastChar;
 
     // Hide empty state
     emptyState.style.display = "none";

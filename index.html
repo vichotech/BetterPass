@@ -98,21 +98,39 @@
                 </div>
             </div>
 
-            <!-- FAKE SELECT -->
-            <div class="input-frame input-frame-v select-frame w--100 flex f-d--col al-i--start j-c--space-b g--1">
-                <label for="fake-select" class="p--0_1 text_body-xs c--ligth">First character:</label>
-                <details class="custom-select w--100 relative" id="fake-select">
-                    <summary class="radios h--11 p--0_3 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 f-fam--p flex flex-row al-i--center j-c--space-b cur--pointer tr--a_out_4">
-                        <p id="fake-label" class="text_body-s"></p>
-                        <i class="chevron-down tr--a_ease_1"></i>
-                        <!-- <img src="assets/svg/chevron-down.svg" alt="down" class="svg-icon svg-icon-s animated-icon"> -->
-                    </summary>
-                    <ul id="fake-options-list" class="list w--100 p--2 flex f-d--col g--2 b--p-10 bd--p-50-10_1_sd bd-rd--2 absolute l--0">
-                        <li class="opt-cont">
-                            <input id="first-radio" class="fake-opt w--100 bd-rd--1 bd--p-50-10_1_sd tr--a_out_2 cur--pointer" type="radio" name="char" value="None" checked>
-                        </li>
-                    </ul>
-                </details>
+            <!-- FAKE SELECTS -->
+            <div class="w--100 flex g--3">
+                <div class="input-frame input-frame-v select-frame w--100 flex f-d--col al-i--start j-c--space-b g--1">
+                    <label for="fake-select" class="p--0_1 text_body-xs c--ligth">First character:</label>
+                    <details class="custom-select w--100 relative" id="fake-select">
+                        <summary class="radios h--11 p--0_3 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 f-fam--p flex flex-row al-i--center j-c--space-b cur--pointer tr--a_out_4">
+                            <p id="fake-label" class="text_body-s"></p>
+                            <i class="chevron-down tr--a_ease_1"></i>
+                            <!-- <img src="assets/svg/chevron-down.svg" alt="down" class="svg-icon svg-icon-s animated-icon"> -->
+                        </summary>
+                        <ul id="fake-options-list" class="list w--100 p--2 flex f-d--col g--2 b--p-10 bd--p-50-10_1_sd bd-rd--2 absolute l--0">
+                            <li class="opt-cont first-char">
+                                <input id="first-radio" class="fake-opt w--100 bd-rd--1 bd--p-50-10_1_sd tr--a_out_2 cur--pointer" type="radio" name="first-char" value="None" checked>
+                            </li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="input-frame input-frame-v select-frame w--100 flex f-d--col al-i--start j-c--space-b g--1">
+                    <label for="last-char-fake-select" class="p--0_1 text_body-xs c--ligth">Last character:</label>
+                    <details class="custom-select w--100 relative" id="last-char-fake-select">
+                        <summary class="radios h--11 p--0_3 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 f-fam--p flex flex-row al-i--center j-c--space-b cur--pointer tr--a_out_4">
+                            <p id="last-char-fake-label" class="text_body-s"></p>
+                            <i class="chevron-down tr--a_ease_1"></i>
+                            <!-- <img src="assets/svg/chevron-down.svg" alt="down" class="svg-icon svg-icon-s animated-icon"> -->
+                        </summary>
+                        <ul id="last-char-fake-options-list" class="list w--100 p--2 flex f-d--col g--2 b--p-10 bd--p-50-10_1_sd bd-rd--2 absolute l--0">
+                            <li class="opt-cont last-char">
+                                <input id="last-char-first-radio" class="fake-opt w--100 bd-rd--1 bd--p-50-10_1_sd tr--a_out_2 cur--pointer" type="radio" name="last-char" value="None" checked>
+                            </li>
+                        </ul>
+                    </details>
+                </div>
             </div>
 
             <!-- BUTTONS -->

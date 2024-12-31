@@ -15,19 +15,35 @@ const lengthInput = document.getElementById("length-input");
 const passNumberLabel = document.getElementById("pass-number-label");
 const passNumberInput = document.getElementById("pass-number-input");
 
-// Fake select
+// First character fake select
 const fakeLabel = document.getElementById("fake-label");
 const fakeSelect = document.getElementById("fake-select");
 const fakeOptionsList = document.getElementById("fake-options-list");
 const firstRadio = document.getElementById("first-radio");
 
+// Last character fake select
+const lastCharFakeLabel = document.getElementById("last-char-fake-label");
+const lastCharFakeSelect = document.getElementById("last-char-fake-select");
+const lastCharFakeOptionsList = document.getElementById("last-char-fake-options-list");
+const lastCharFirstRadio = document.getElementById("last-char-first-radio");
+
 // Buttons
 const doneBtn = document.getElementById("done-btn");
 const cancBtn = document.getElementById("canc-btn");
 
+firstRadio.addEventListener('click', () => {
+    fakeLabel.innerText = firstRadio.value;
+    firstChar = "";
+});
+
+lastCharFirstRadio.addEventListener('click', () => {
+    lastCharFakeLabel.innerText = lastCharFirstRadio.value;
+    lastChar = "";
+});
+
 /* FUNCTIONS
 ================================================================= */
-function updateFirstCharSelect() {
+function updateCharSelects() {
     const fakeOptions = Array.from(document.querySelectorAll(".fake-opt"));
     const upperOptions = Array.from(document.querySelectorAll(".upper-char"));
     const lowerOptions = Array.from(document.querySelectorAll(".lower-char"));
@@ -53,29 +69,37 @@ function updateFirstCharSelect() {
 
     upperChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
-            const li = createRadioElement("upper-char", char);
-            fakeOptionsList.appendChild(li);
+            const firstCharLi = createRadioElement("upper-char", "first-char", char, "first-char");
+            fakeOptionsList.appendChild(firstCharLi);
+            const lastCharLi = createRadioElement("upper-char", "last-char", char, "last-char");
+            lastCharFakeOptionsList.appendChild(lastCharLi);
         }
     });
 
     lowerChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
-            const li = createRadioElement("lower-char", char);
-            fakeOptionsList.appendChild(li);
+            const firstCharLi = createRadioElement("lower-char", "first-char", char, "first-char");
+            fakeOptionsList.appendChild(firstCharLi);
+            const lastCharLi = createRadioElement("lower-char", "last-char", char, "last-char");
+            lastCharFakeOptionsList.appendChild(lastCharLi);
         }
     });
 
     numbersChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
-            const li = createRadioElement("number-char", char);
-            fakeOptionsList.appendChild(li);
+            const firstCharLi = createRadioElement("number-char", "first-char", char, "first-char");
+            fakeOptionsList.appendChild(firstCharLi);
+            const lastCharLi = createRadioElement("number-char", "last-char", char, "last-char");
+            lastCharFakeOptionsList.appendChild(lastCharLi);
         }
     });
 
     specialChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
-            const li = createRadioElement("special-char", char);
-            fakeOptionsList.appendChild(li);
+            const firstCharLi = createRadioElement("special-char", "first-char", char, "first-char");
+            fakeOptionsList.appendChild(firstCharLi);
+            const lastCharLi = createRadioElement("special-char", "last-char", char, "last-char");
+            lastCharFakeOptionsList.appendChild(lastCharLi);
         }
     });
 };
@@ -90,13 +114,14 @@ function showToastIfAnyChecks() {
     }
 };
 
-function createRadioElement(liClass, radioValue) {
+function createRadioElement(typeClass, positionClass, radioValue, name) {
     const li = document.createElement("li");
     li.classList.add("opt-cont");
-    li.classList.add(liClass);
+    li.classList.add(typeClass);
+    li.classList.add(positionClass);
     const radio = document.createElement("input");
     radio.setAttribute("type", "radio");
-    radio.setAttribute("name", "char");
+    radio.setAttribute("name", name);
     radio.classList.add("fake-opt");
     radio.classList.add("w--100");
     radio.classList.add("bd-rd--1");
@@ -104,12 +129,17 @@ function createRadioElement(liClass, radioValue) {
     radio.classList.add("tr--a_out_4");
     radio.classList.add("cur--pointer");
     radio.value = radioValue;
-    radio.addEventListener("click", () => {
+    radio.addEventListener("click", (e) => {
         if (radio.checked) {
-            firstChar = radio.value;
-            fakeLabel.innerText = firstChar;
+            if (e.target.closest('.first-char')) {
+                firstChar = radio.value;
+                fakeLabel.innerText = firstChar;
+            } else {
+                lastChar = radio.value;
+                lastCharFakeLabel.innerText = lastChar;
+            }           
         };
-        setTimeout(closeDetails, 400);
+        setTimeout(closeDetails, 200);
     });
     li.appendChild(radio);
     return li;
@@ -117,6 +147,7 @@ function createRadioElement(liClass, radioValue) {
 
 function closeDetails() {
     fakeSelect.removeAttribute("open");
+    lastCharFakeSelect.removeAttribute("open");
 };
 
 function resetSettings() {
@@ -130,16 +161,18 @@ function resetSettings() {
     hasNumbers = true;
     hasSpecial = true;
     
-    // Reset 'firstCharSelect' option
+    // Reset 'firstCharSelect' and 'lastCharSelect' options
     firstRadio.checked = true;
-    fakeLabel.innerText = "None";
-    firstChar = "";
+    fakeLabel.innerText = firstRadio.value;
+    lastCharFirstRadio.checked = true;
+    lastCharFakeLabel.innerText = lastCharFirstRadio.value;
+
     closeDetails();
 
     // Reset #length-input and #length-label
     lengthInput.value = 8;
-    length = lengthInput.value;
-    lengthLabel.textContent = `Length: ${length}`;
+    maxLength = lengthInput.value;
+    lengthLabel.textContent = `Length: ${maxLength}`;
 
     // Reset #pass-number-input and #pass-number-label
     passNumberInput.value = 1;
@@ -162,28 +195,28 @@ upperCheck.addEventListener("input", () => {
     hasUpper = upperCheck.checked ? true : false;
     check(upperChars);
     showToastIfAnyChecks();
-    updateFirstCharSelect();
+    updateCharSelects();
 });
 
 lowerCheck.addEventListener("input", () => {
     hasLower = lowerCheck.checked ? true : false;
     check(lowerChars);
     showToastIfAnyChecks();
-    updateFirstCharSelect();
+    updateCharSelects();
 });
 
 numbersCheck.addEventListener("input", () => {
     hasNumbers = numbersCheck.checked ? true : false;
     check(numbersChars);
     showToastIfAnyChecks();
-    updateFirstCharSelect();
+    updateCharSelects();
 });
 
 specialCheck.addEventListener("input", () => {
     hasSpecial = specialCheck.checked ? true : false;
     check(specialChars);
     showToastIfAnyChecks();
-    updateFirstCharSelect();
+    updateCharSelects();
 });
 
 // Ranges
@@ -193,15 +226,24 @@ passNumberInput.addEventListener("input", () => {
 });
 
 lengthInput.addEventListener("input", () => {
-    length = lengthInput.value;
-    lengthLabel.textContent = `Length: ${length}`;
+    maxLength = lengthInput.value;
+    lengthLabel.textContent = `Length: ${maxLength}`;
 });
 
-// Fake select
-firstRadio.addEventListener("click", function() {
+// First character fake select
+firstRadio.addEventListener("click", () => {
     if (this.checked) {
         firstChar = "";
         fakeLabel.innerText = this.value;
+    };
+    setTimeout(closeDetails, 400);
+});
+
+// Last character fake select
+lastCharFirstRadio.addEventListener("click", () => {
+    if (this.checked) {
+        lastChar = "";
+        lastCharFakeLabel.innerText = this.value;
     };
     setTimeout(closeDetails, 400);
 });
