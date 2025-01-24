@@ -195,13 +195,13 @@ function genPassword() {
         char.classList.add("char-span");
         char.innerText = c;
         if (upperChars.includes(c)) {
-            char.style.color = "#0ff";
+            char.style.color = "#0F0";
         } else if (lowerChars.includes(c)) {
-            char.style.color = "#0f0";
+            char.style.color = "#FF0";
         } else if (numbersChars.includes(c)) {
-            char.style.color = "#f0f";
+            char.style.color = "#0FF";
         } else if (specialChars.includes(c)) {
-            char.style.color = "#ff0";
+            char.style.color = "#F0F";
         }
         passWrap.appendChild(char);
         passBtn.appendChild(passWrap);

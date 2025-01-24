@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BetterPass</title>
+    <title>BetterPass · Secure passwords generator</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="classes.css">
     <link type="image/png" sizes="32x32" rel="icon" href="assets/img/icons8-password-3-32.png">
@@ -67,27 +67,39 @@
             <p class="modal-title p--0_1 text_sub-m c--p-50">Settings</p>
 
             <!-- CHECKBOXES -->
-            <div class="checkbox-frames-cont w--100 flex f-d--col">
-                <label for="include-upper" class="checkbox-frame h--11 w--100 p--0_3 b--p-50-10 flex flex-row al-i--center j-c--space-b text_body-s">
+            <div class="checkbox-frames-cont w--100 grid g--2">
+                <label for="include-upper" class="checkbox-frame relative w--100 p--0_3 b--p-50-10 flex f-d--col al-i--start j-c--center tr--a_out_2">
+                    <span class="uppercase">ABC</span>
                     Uppercase
-                    <input type="checkbox" name="include-upper" id="include-upper" class="h--6 w--10 bd-rd--3 block relative b--p-50-10 bd--p-50-10_1_sd tr--a_out_2" checked />
+                    <input type="checkbox" name="include-upper" id="include-upper" checked />
+                    <div class="fake-check bd-rd--1 absolute b--p-50-10 bd--p-50-10_1_sd">
+                    </div>
                 </label>
-                <label for="include-lower" class="checkbox-frame h--11 w--100 p--0_3 b--p-50-10 flex flex-row al-i--center j-c--space-b text_body-s">
+                <label for="include-lower" class="checkbox-frame relative w--100 p--0_3 b--p-50-10 flex f-d--col al-i--start j-c--center tr--a_out_2">
+                    <span class="lowercase">abc</span>
                     Lowercase
-                    <input type="checkbox" name="include-lower" id="include-lower" class="h--6 w--10 bd-rd--3 block relative b--p-50-10 bd--p-50-10_1_sd tr--a_out_2" checked/>
+                    <input type="checkbox" name="include-lower" id="include-lower" checked/>
+                    <div class="fake-check bd-rd--1 absolute b--p-50-10 bd--p-50-10_1_sd">
+                    </div>
                 </label>
-                <label for="include-numbers" class="checkbox-frame h--11 w--100 p--0_3 b--p-50-10 flex flex-row al-i--center j-c--space-b text_body-s">
+                <label for="include-numbers" class="checkbox-frame relative w--100 p--0_3 b--p-50-10 flex f-d--col al-i--start j-c--center tr--a_out_2">
+                    <span class="number">123</span>
                     Numbers
-                    <input type="checkbox" name="include-numbers" id="include-numbers" class="h--6 w--10 bd-rd--3 block relative b--p-50-10 bd--p-50-10_1_sd tr--a_out_2" checked/>
+                    <input type="checkbox" name="include-numbers" id="include-numbers" checked/>
+                    <div class="fake-check bd-rd--1 absolute b--p-50-10 bd--p-50-10_1_sd">
+                    </div>
                 </label>
-                <label for="include-special" class="checkbox-frame h--11 w--100 p--0_3 b--p-50-10 flex flex-row al-i--center j-c--space-b text_body-s">
-                    Special characters
-                    <input type="checkbox" name="include-special" id="include-special" class="h--6 w--10 bd-rd--3 block relative b--p-50-10 bd--p-50-10_1_sd tr--a_out_2" checked/>
+                <label for="include-special" class="checkbox-frame relative w--100 p--0_3 b--p-50-10 flex f-d--col al-i--start j-c--center tr--a_out_2">
+                    <span class="special">$&!</span>
+                    Special
+                    <input type="checkbox" name="include-special" id="include-special" checked/>
+                    <div class="fake-check bd-rd--1 absolute b--p-50-10 bd--p-50-10_1_sd">
+                    </div>
                 </label>
             </div>
 
             <!-- RANGES -->
-            <div class="w--100 flex g--3">
+            <div class="w--100 flex g--2">
                 <div class="input-frame input-frame-v w--100 flex f-d--col al-i--start g--1" id="pass-number-frame">
                     <label id="pass-number-label" class="p--0_1 text_body-xs c--ligth" for="pass-number-input">Passwords: </label>
                     <input class="h--11 w--100 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 tr--a_out_2 cur--pointer" type="range" name="pass-number-input" id="pass-number-input" value="1" min="1" max="8">
@@ -99,7 +111,7 @@
             </div>
 
             <!-- FAKE SELECTS -->
-            <div class="w--100 flex g--3">
+            <div class="w--100 flex g--2">
                 <div class="input-frame input-frame-v select-frame w--100 flex f-d--col al-i--start j-c--space-b g--1">
                     <label for="fake-select" class="p--0_1 text_body-xs c--ligth">First character:</label>
                     <details class="custom-select w--100 relative" id="fake-select">
@@ -134,8 +146,8 @@
             </div>
 
             <!-- BUTTONS -->
-            <div class="btn-cont flex flex-row g--4 z--2">
-                <button id="canc-btn" class="secondary-btn settings-toggle h--11 p--0_2 b--p-10 bd--p-50-10_1_sd bd-rd--2 text_body-s c--p-50 tr--a_out_2 cur--pointer">Reset</button>
+            <div class="btn-cont flex flex-row g--2 z--2">
+                <button id="canc-btn" class="secondary-btn settings-toggle h--11 p--0_2 b--p-10 bd--p-50-10_1_sd bd-rd--2 text_body-s c--p-50 tr--a_out_2 cur--pointer" hidden>Reset</button>
                 <button id="done-btn" class="primary-btn settings-toggle h--11 w--100 p--0_2 b--p-50 bd-rd--2 text_sub-s c--dark tr--a_out_2 cur--pointer">Done</button>
             </div>
         </div>
