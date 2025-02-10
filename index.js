@@ -100,37 +100,19 @@ function genPassword() {
         allChars = allChars.concat(specialChars)
         bindingChars.push(specialChars[index]);
     }
-
     passChars = passChars.concat(bindingChars);
 
     // Evaluate if there is any first chars defined
     if (firstChar) {
         if (lastChar) {
-            // password = firstChar + lastChar;
             currentLength = 2;
         } else {
-            // password = firstChar;
             currentLength = 1;
-            // Concatenate the rest of 'password' characters up to its max. length
-            /* for (let i = bindingChars.length; i < maxLength - 1; i++) {
-                let index = Math.floor(Math.random() * allChars.length);
-                passChars.push(allChars[index]);
-            } */
         }
     } else if (lastChar) {
-        // password = lastChar;
         currentLength = 1;
-        /* for (let i = bindingChars.length; i < maxLength - 1; i++) {
-            let index = Math.floor(Math.random() * allChars.length);
-            passChars.push(allChars[index]);
-        } */
     } else {
-        // password = "";
         currentLength = 0;
-        /* for (let i = bindingChars.length; i < maxLength; i++) {
-            let index = Math.floor(Math.random() * allChars.length);
-            passChars = passChars.concat(allChars[index]);
-        } */
     };
 
     // Concatenate the rest of 'password' characters up to its max. length
@@ -138,19 +120,12 @@ function genPassword() {
         let index = Math.floor(Math.random() * allChars.length);
         passChars.push(allChars[index]);
     }
-
-    //console.log(bindingChars, passChars);
-
-    //password = firstChar + passChars.join('') + lastChar;
-
     let tempPassword = '';
-
     while (passChars.length > 0) {
         let index = Math.floor(Math.random() * passChars.length);
         tempPassword += passChars[index];
         passChars.splice(index, 1);
     }
-
     password = firstChar + tempPassword + lastChar;
 
     // Hide empty state

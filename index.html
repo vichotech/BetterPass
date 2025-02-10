@@ -20,10 +20,13 @@
         <p id="background" class="f-fam--c text_h6 c--dark"></p>
     </div>
     <main class="h--100 p--4 relative flex f-d--col j-c--space-b al-i--center g--2">
-        <header class="main-header w--100 flex j-c--space-b al-i--center b--p-10-50 bdp-f--blur-1 bd--p-50-10_1_sd bd-rd--2 c--p-50">
-            <h1 class="text_sub-l">BetterPass</h1>
+        <header class="main-header w--100 flex j-c--space-b al-i--center b--p-10-50 bdp-f--blur-1 bd--p-50-10_1_sd bd-rd--pill c--p-50">
+            <div class="branding flex al-i--base g--2">
+                <h1 class="text_sub-l">BetterPass</h1>
+                <span class="version text_sub-s c--p-20">v1.0.1</span>
+            </div>
             <div class="icons-cont flex al-i--center g--3">
-                <a class="square--6 c--current" href="https://github.com/vichotech/betterpass" target="_blank" title="@vichotech on GitHub">
+                <a class="square--6 c--current" href="https://github.com/vichotech/betterpass" target="_blank" title="@vichotech on GitHub" rel="noopener">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -41,16 +44,25 @@
 
         <!-- PASSWORD CONTAINER -->
         <div class="password-cont flex f-d--col al-i--start g--1 c--p-50 z--1">
-            <div class="flex f-d--col al-i--center c--ligth g--4" id="empty-state">
+            <div class="flex f-d--col al-i--center c--ligth g--2" id="empty-state">
                 <p class="empty-state__title">You've not created any passwords yet.</p>
-                <p class="text_body-s">Press <span class="command c--p-50 bd-rd--1">Generate</span> to start.</p>
+                <p class="text_body-s flex al-i--center g--2">Press <span class="command b--p-50 c--dark bd-rd--pill in-flex al-i--center j-c--center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dice-5"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M16 8h.01"/><path d="M8 8h.01"/><path d="M8 16h.01"/><path d="M16 16h.01"/><path d="M12 12h.01"/></svg>
+                </span> to start.</p>
             </div>
         </div>
 
         <!-- BUTTONS CONTAINER -->
-        <div class="btn-cont flex flex-row g--4 z--2">
-            <button id="stng-btn" class="secondary-btn settings-toggle h--11 p--0_2 b--p-10 bd--p-50-10_1_sd bd-rd--2 text_body-s c--p-50 tr--a_out_2 cur--pointer">Settings</button>
-            <button id="gen-btn" class="primary-btn h--11 p--0_2 b--p-50 bd-rd--2 text_sub-s c--dark tr--a_out_2 cur--pointer">Generate</button>
+        <div class="btn-cont p--1 flex j-c--center g--1 b--p-10-50 bdp-f--blur-1 bd--p-50-10_1_sd bd-rd--pill z--2">
+            <button id="stng-btn" class="secondary-btn settings-toggle h--12 w--12 p--0_2 b--p-50-20 bd--p-50-10_1_sd bd-rd--pill text_body-s c--p-50 tr--a_out_2 cur--pointer flex al-i--center j-c--center" title="Settings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+            </button>
+            <button id="gen-btn" class="primary-btn h--12 w--12 p--0_2 b--p-50 bd-rd--pill text_sub-s c--dark tr--a_out_2 cur--pointer flex al-i--center j-c--center" title="Generate password">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dice-5"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M16 8h.01"/><path d="M8 8h.01"/><path d="M8 16h.01"/><path d="M16 16h.01"/><path d="M12 12h.01"/></svg>
+            </button>
+            <button id="" class="secondary-btn h--12 w--12 p--0_2 b--p-50-20 bd--p-50-10_1_sd bd-rd--pill text_body-s c--p-50 tr--a_out_2 cur--pointer flex al-i--center j-c--center" title="History (Coming soon)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+            </button>
         </div>
 
         <!-- TOASTS CONTAINER -->
@@ -63,8 +75,8 @@
 
     <!-- SETTINGS MODAL -->
     <div class="modal-cont h--100 w--100 flex-row al-i--center j-c--center fixed l--0 tr--a_out_4 z--3" id="settings-modal-cont">
-        <div class="modal p--4 b--p-5 bd--p-50-10_1_sd bd-rd--5 c--ligth flex f-d--col al-i--start g--3 ov--hidden" id="settings-modal">
-            <p class="modal-title p--0_1 text_sub-m c--p-50">Settings</p>
+        <div class="modal p--2 b--p-5 bd--p-50-10_1_sd bd-rd--4 c--ligth flex f-d--col al-i--start g--2 ov--hidden" id="settings-modal">
+            <p class="modal-title p--2_1 text_sub-m c--p-50">Settings</p>
 
             <!-- CHECKBOXES -->
             <div class="checkbox-frames-cont w--100 grid g--2">
@@ -102,11 +114,11 @@
             <div class="w--100 flex g--2">
                 <div class="input-frame input-frame-v w--100 flex f-d--col al-i--start g--1" id="pass-number-frame">
                     <label id="pass-number-label" class="p--0_1 text_body-xs c--ligth" for="pass-number-input">Passwords: </label>
-                    <input class="h--11 w--100 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 tr--a_out_2 cur--pointer" type="range" name="pass-number-input" id="pass-number-input" value="1" min="1" max="8">
+                    <input class="s--sm w--100 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 tr--a_out_2 cur--pointer" type="range" name="pass-number-input" id="pass-number-input" value="1" min="1" max="8">
                 </div>
                 <div class="input-frame input-frame-v w--100 flex f-d--col al-i--start g--1" id="length-frame">
                     <label id="length-label" class="lp--0_1 text_body-xs c--ligth" for="length-input">Length: </label>
-                    <input class="h--11 w--100 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 tr--a_out_2 cur--pointer" type="range" name="length-input" id="length-input" value="8" min="8" max="24">
+                    <input class="s--sm w--100 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 tr--a_out_2 cur--pointer" type="range" name="length-input" id="length-input" value="8" min="8" max="24">
                 </div>
             </div>
 
@@ -115,14 +127,14 @@
                 <div class="input-frame input-frame-v select-frame w--100 flex f-d--col al-i--start j-c--space-b g--1">
                     <label for="fake-select" class="p--0_1 text_body-xs c--ligth">First character:</label>
                     <details class="custom-select w--100 relative" id="fake-select">
-                        <summary class="radios h--11 p--0_3 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 f-fam--p flex flex-row al-i--center j-c--space-b cur--pointer tr--a_out_4">
+                        <summary class="radios s--sm p--0_2_0_3 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd f-fam--p flex flex-row al-i--center j-c--space-b cur--pointer tr--a_out_4">
                             <p id="fake-label" class="text_body-s"></p>
                             <i class="chevron-down tr--a_ease_1"></i>
                             <!-- <img src="assets/svg/chevron-down.svg" alt="down" class="svg-icon svg-icon-s animated-icon"> -->
                         </summary>
-                        <ul id="fake-options-list" class="list w--100 p--2 flex f-d--col g--2 b--p-10 bd--p-50-10_1_sd bd-rd--2 absolute l--0">
+                        <ul id="fake-options-list" class="list w--100 p--1 flex f-d--col g--1 b--p-10 bd--p-50-10_1_sd bd-rd--3 absolute l--0">
                             <li class="opt-cont first-char">
-                                <input id="first-radio" class="fake-opt w--100 bd-rd--1 bd--p-50-10_1_sd tr--a_out_2 cur--pointer" type="radio" name="first-char" value="None" checked>
+                                <input id="first-radio" class="fake-opt h--10 w--100 bd--p-50-10_1_sd tr--a_out_2 bd-rd--2 cur--pointer" type="radio" name="first-char" value="None" checked>
                             </li>
                         </ul>
                     </details>
@@ -131,14 +143,14 @@
                 <div class="input-frame input-frame-v select-frame w--100 flex f-d--col al-i--start j-c--space-b g--1">
                     <label for="last-char-fake-select" class="p--0_1 text_body-xs c--ligth">Last character:</label>
                     <details class="custom-select w--100 relative" id="last-char-fake-select">
-                        <summary class="radios h--11 p--0_3 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd bd-rd--2 f-fam--p flex flex-row al-i--center j-c--space-b cur--pointer tr--a_out_4">
+                        <summary class="radios s--sm p--0_2_0_3 b--p-10 bdp-f--blur-2 bd--p-50-10_1_sd f-fam--p flex flex-row al-i--center j-c--space-b cur--pointer tr--a_out_4">
                             <p id="last-char-fake-label" class="text_body-s"></p>
                             <i class="chevron-down tr--a_ease_1"></i>
                             <!-- <img src="assets/svg/chevron-down.svg" alt="down" class="svg-icon svg-icon-s animated-icon"> -->
                         </summary>
-                        <ul id="last-char-fake-options-list" class="list w--100 p--2 flex f-d--col g--2 b--p-10 bd--p-50-10_1_sd bd-rd--2 absolute l--0">
+                        <ul id="last-char-fake-options-list" class="list w--100 p--1 flex f-d--col g--1 b--p-10 bd--p-50-10_1_sd bd-rd--3 absolute l--0">
                             <li class="opt-cont last-char">
-                                <input id="last-char-first-radio" class="fake-opt w--100 bd-rd--1 bd--p-50-10_1_sd tr--a_out_2 cur--pointer" type="radio" name="last-char" value="None" checked>
+                                <input id="last-char-first-radio" class="fake-opt h--10 w--100 bd--p-50-10_1_sd tr--a_out_2 bd-rd--2 cur--pointer" type="radio" name="last-char" value="None" checked>
                             </li>
                         </ul>
                     </details>
@@ -146,9 +158,9 @@
             </div>
 
             <!-- BUTTONS -->
-            <div class="btn-cont flex flex-row g--2 z--2">
-                <button id="canc-btn" class="secondary-btn settings-toggle h--11 p--0_2 b--p-10 bd--p-50-10_1_sd bd-rd--2 text_body-s c--p-50 tr--a_out_2 cur--pointer" hidden>Reset</button>
-                <button id="done-btn" class="primary-btn settings-toggle h--11 w--100 p--0_2 b--p-50 bd-rd--2 text_sub-s c--dark tr--a_out_2 cur--pointer">Done</button>
+            <div class="btn-cont-v flex flex-col g--2 z--2">
+                <button id="canc-btn" class="secondary-btn settings-toggle s--sm p--0_2 b--p-10 bd--p-50-10_1_sd text_body-s c--p-50 tr--a_out_2 cur--pointer" hidden>Reset</button>
+                <button id="done-btn" class="primary-btn settings-toggle s--sm p--0_2 b--p-50 text_sub-s c--dark tr--a_out_2 cur--pointer">Done</button>
             </div>
         </div>
     </div>

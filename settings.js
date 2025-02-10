@@ -123,8 +123,9 @@ function createRadioElement(typeClass, positionClass, radioValue, name) {
     radio.setAttribute("type", "radio");
     radio.setAttribute("name", name);
     radio.classList.add("fake-opt");
+    radio.classList.add("h--10");
     radio.classList.add("w--100");
-    radio.classList.add("bd-rd--1");
+    radio.classList.add("bd-rd--2");
     radio.classList.add("bd--p-50-10_1_sd");
     radio.classList.add("tr--a_out_4");
     radio.classList.add("cur--pointer");
