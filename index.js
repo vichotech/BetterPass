@@ -66,12 +66,12 @@ function check(charArray) {
         firstChar = "";
         firstCharFakeLabel.innerText = "None";
         firstCharFirstRadio.checked = true;
-    } else if (charArray.some((char) => char === lastChar)) {
+    }
+    
+    if (charArray.some((char) => char === lastChar)) {
         lastChar = "";
         lastCharFakeLabel.innerText = "None";
         lastCharFirstRadio.checked = true;
-    } else {
-        return;
     }
 };
 
