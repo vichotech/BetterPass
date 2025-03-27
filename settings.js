@@ -16,10 +16,10 @@ const passNumberLabel = document.getElementById("pass-number-label");
 const passNumberInput = document.getElementById("pass-number-input");
 
 // First character fake select
-const fakeLabel = document.getElementById("fake-label");
-const fakeSelect = document.getElementById("fake-select");
-const fakeOptionsList = document.getElementById("fake-options-list");
-const firstRadio = document.getElementById("first-radio");
+const firstCharFakeLabel = document.getElementById("fake-label");
+const firstCharFakeSelect = document.getElementById("fake-select");
+const firstCharFakeOptionsList = document.getElementById("fake-options-list");
+const firstCharFirstRadio = document.getElementById("first-radio");
 
 // Last character fake select
 const lastCharFakeLabel = document.getElementById("last-char-fake-label");
@@ -30,16 +30,6 @@ const lastCharFirstRadio = document.getElementById("last-char-first-radio");
 // Buttons
 const doneBtn = document.getElementById("done-btn");
 const cancBtn = document.getElementById("canc-btn");
-
-firstRadio.addEventListener('click', () => {
-    fakeLabel.innerText = firstRadio.value;
-    firstChar = "";
-});
-
-lastCharFirstRadio.addEventListener('click', () => {
-    lastCharFakeLabel.innerText = lastCharFirstRadio.value;
-    lastChar = "";
-});
 
 /* FUNCTIONS
 ================================================================= */
@@ -70,7 +60,7 @@ function updateCharSelects() {
     upperChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("upper-char", "first-char", char, "first-char");
-            fakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptionsList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("upper-char", "last-char", char, "last-char");
             lastCharFakeOptionsList.appendChild(lastCharLi);
         }
@@ -79,7 +69,7 @@ function updateCharSelects() {
     lowerChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("lower-char", "first-char", char, "first-char");
-            fakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptionsList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("lower-char", "last-char", char, "last-char");
             lastCharFakeOptionsList.appendChild(lastCharLi);
         }
@@ -88,7 +78,7 @@ function updateCharSelects() {
     numbersChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("number-char", "first-char", char, "first-char");
-            fakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptionsList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("number-char", "last-char", char, "last-char");
             lastCharFakeOptionsList.appendChild(lastCharLi);
         }
@@ -97,7 +87,7 @@ function updateCharSelects() {
     specialChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("special-char", "first-char", char, "first-char");
-            fakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptionsList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("special-char", "last-char", char, "last-char");
             lastCharFakeOptionsList.appendChild(lastCharLi);
         }
@@ -110,7 +100,7 @@ function showToastIfAnyChecks() {
             type: "warning",
             title: "Warning!",
             description: "Select at least one type of characters."
-        }); // Show toast once the password is copied. See function below 👇
+        }); // Show toast once the password is copied. See showToast() function below 👇
     }
 };
 
@@ -134,7 +124,7 @@ function createRadioElement(typeClass, positionClass, radioValue, name) {
         if (radio.checked) {
             if (e.target.closest('.first-char')) {
                 firstChar = radio.value;
-                fakeLabel.innerText = firstChar;
+                firstCharFakeLabel.innerText = firstChar;
             } else {
                 lastChar = radio.value;
                 lastCharFakeLabel.innerText = lastChar;
@@ -146,8 +136,14 @@ function createRadioElement(typeClass, positionClass, radioValue, name) {
     return li;
 };
 
+function toggleDetails(sideSelect) {
+    if (sideSelect.hasAttribute("open")) {
+        sideSelect.removeAttribute("open");
+    }
+};
+
 function closeDetails() {
-    fakeSelect.removeAttribute("open");
+    firstCharFakeSelect.removeAttribute("open");
     lastCharFakeSelect.removeAttribute("open");
 };
 
@@ -163,8 +159,8 @@ function resetSettings() {
     hasSpecial = true;
     
     // Reset 'firstCharSelect' and 'lastCharSelect' options
-    firstRadio.checked = true;
-    fakeLabel.innerText = firstRadio.value;
+    firstCharFirstRadio.checked = true;
+    firstCharFakeLabel.innerText = firstCharFirstRadio.value;
     lastCharFirstRadio.checked = true;
     lastCharFakeLabel.innerText = lastCharFirstRadio.value;
 
@@ -183,6 +179,16 @@ function resetSettings() {
 
 /* EVENTS
 ================================================================= */
+firstCharFirstRadio.addEventListener('click', () => {
+    firstCharFakeLabel.innerText = firstCharFirstRadio.value;
+    firstChar = "";
+});
+
+lastCharFirstRadio.addEventListener('click', () => {
+    lastCharFakeLabel.innerText = lastCharFirstRadio.value;
+    lastChar = "";
+});
+
 const settingsToggle = Array.from(document.querySelectorAll(".settings-toggle"));
 settingsToggle.forEach((trigger) => {
     trigger.addEventListener("click", () => {
@@ -232,15 +238,23 @@ lengthInput.addEventListener("input", () => {
 });
 
 // First character fake select
-firstRadio.addEventListener("click", () => {
+firstCharFakeSelect.addEventListener("click", () => {
+    toggleDetails(lastCharFakeSelect);
+});
+
+firstCharFirstRadio.addEventListener("click", () => {
     if (this.checked) {
         firstChar = "";
-        fakeLabel.innerText = this.value;
+        firstCharFakeLabel.innerText = this.value;
     };
     setTimeout(closeDetails, 400);
 });
 
 // Last character fake select
+lastCharFakeSelect.addEventListener("click", () => {
+    toggleDetails(firstCharFakeSelect);
+});
+
 lastCharFirstRadio.addEventListener("click", () => {
     if (this.checked) {
         lastChar = "";
@@ -254,6 +268,6 @@ doneBtn.addEventListener("click", () => {
     closeDetails();
 })
 
-cancBtn.addEventListener("click", () => {
+/* cancBtn.addEventListener("click", () => {
     setTimeout(resetSettings, 400);
-});
+}); */

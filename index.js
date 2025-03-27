@@ -6,8 +6,8 @@ const passCont = document.querySelector(".password-cont");
 
 /* VARIABLES
 ================================================================= */
-const upperChars = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split("");
-const lowerChars = "abcdefghijklmnñopqrstuvwxyz".split("");
+const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const lowerChars = "abcdefghijklmnopqrstuvwxyz".split("");
 const numbersChars = Array.from("0123456789");
 const specialChars = "¡!\"#$%&'()*+,-./:;<=>¿?@[\\]^_`{}~".split("");
 const chars = lowerChars.concat(upperChars, numbersChars, specialChars);
@@ -64,8 +64,8 @@ genBtn.addEventListener("click", () => {
 function check(charArray) {
     if (charArray.some((char) => char === firstChar)) {
         firstChar = "";
-        fakeLabel.innerText = "None";
-        firstRadio.checked = true;
+        firstCharFakeLabel.innerText = "None";
+        firstCharFirstRadio.checked = true;
     } else if (charArray.some((char) => char === lastChar)) {
         lastChar = "";
         lastCharFakeLabel.innerText = "None";
