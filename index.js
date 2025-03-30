@@ -33,6 +33,15 @@ window.addEventListener("load", () => {
     updateCharSelects();
 });
 
+document.addEventListener("click", (e) => {
+    if (!firstCharFakeSelect.contains(e.target)) {
+        closeSelect(firstCharFakeSelect);
+    };
+    if (!lastCharFakeSelect.contains(e.target)) {
+        closeSelect(lastCharFakeSelect);
+    };
+});
+
 genBtn.addEventListener("click", () => {
     // Verify if there's any selected checkboxes
     if(!hasUpper && !hasLower && !hasNumbers && !hasSpecial) {

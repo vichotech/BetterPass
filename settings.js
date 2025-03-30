@@ -16,15 +16,15 @@ const passNumberLabel = document.getElementById("pass-number-label");
 const passNumberInput = document.getElementById("pass-number-input");
 
 // First character fake select
-const firstCharFakeLabel = document.getElementById("fake-label");
-const firstCharFakeSelect = document.getElementById("fake-select");
-const firstCharFakeOptionsList = document.getElementById("fake-options-list");
-const firstCharFirstRadio = document.getElementById("first-radio");
+const firstCharFakeLabel = document.getElementById("first-char-fake-label");
+const firstCharFakeSelect = document.getElementById("first-char-fake-select");
+const firstCharFakeOptList = document.getElementById("first-char-fake-opt-list");
+const firstCharFirstRadio = document.getElementById("first-char-first-radio");
 
 // Last character fake select
 const lastCharFakeLabel = document.getElementById("last-char-fake-label");
 const lastCharFakeSelect = document.getElementById("last-char-fake-select");
-const lastCharFakeOptionsList = document.getElementById("last-char-fake-options-list");
+const lastCharFakeOptList = document.getElementById("last-char-fake-opt-list");
 const lastCharFirstRadio = document.getElementById("last-char-first-radio");
 
 // Buttons
@@ -60,36 +60,36 @@ function updateCharSelects() {
     upperChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("upper-char", "first-char", char, "first-char");
-            firstCharFakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("upper-char", "last-char", char, "last-char");
-            lastCharFakeOptionsList.appendChild(lastCharLi);
+            lastCharFakeOptList.appendChild(lastCharLi);
         }
     });
 
     lowerChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("lower-char", "first-char", char, "first-char");
-            firstCharFakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("lower-char", "last-char", char, "last-char");
-            lastCharFakeOptionsList.appendChild(lastCharLi);
+            lastCharFakeOptList.appendChild(lastCharLi);
         }
     });
 
     numbersChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("number-char", "first-char", char, "first-char");
-            firstCharFakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("number-char", "last-char", char, "last-char");
-            lastCharFakeOptionsList.appendChild(lastCharLi);
+            lastCharFakeOptList.appendChild(lastCharLi);
         }
     });
 
     specialChars.forEach((char) => {
         if (!fakeOptions.some((option) => option.value === char)) {
             const firstCharLi = createRadioElement("special-char", "first-char", char, "first-char");
-            firstCharFakeOptionsList.appendChild(firstCharLi);
+            firstCharFakeOptList.appendChild(firstCharLi);
             const lastCharLi = createRadioElement("special-char", "last-char", char, "last-char");
-            lastCharFakeOptionsList.appendChild(lastCharLi);
+            lastCharFakeOptList.appendChild(lastCharLi);
         }
     });
 };
@@ -100,7 +100,7 @@ function showToastIfAnyChecks() {
             type: "warning",
             title: "Warning!",
             description: "Select at least one type of characters."
-        }); // Show toast once the password is copied. See showToast() function below 👇
+        }); // Show toast once the password is copied. See 'toasts.js' file.
     }
 };
 
@@ -117,7 +117,7 @@ function createRadioElement(typeClass, positionClass, radioValue, name) {
     radio.classList.add("w--100");
     radio.classList.add("bd-rd--2");
     radio.classList.add("bd--p-50-10_1_sd");
-    radio.classList.add("tr--a_out_4");
+    radio.classList.add("tr--a_out_2");
     radio.classList.add("cur--pointer");
     radio.value = radioValue;
     radio.addEventListener("click", (e) => {
@@ -130,19 +130,25 @@ function createRadioElement(typeClass, positionClass, radioValue, name) {
                 lastCharFakeLabel.innerText = lastChar;
             }           
         };
-        setTimeout(closeDetails, 200);
+
+        if (firstCharFakeSelect.contains(radio)) {
+            setTimeout(closeSelect(firstCharFakeSelect), 200);
+        }
+        if (lastCharFakeSelect.contains(radio)) {
+            setTimeout(closeSelect(lastCharFakeSelect), 200);
+        }
     });
+    
     li.appendChild(radio);
     return li;
 };
 
-function closeDetails() {
-    firstCharFakeSelect.removeAttribute("open");
-    lastCharFakeSelect.removeAttribute("open");
+function closeSelect(select) {
+    select.removeAttribute("open");
 };
 
 function resetSettings() {
-    // Select all the checkboxes and update their relatives variables
+    // Select all the checkboxes and reset their relatives variables
     upperCheck.checked = true;
     lowerCheck.checked = true;
     numbersCheck.checked = true;
@@ -158,7 +164,8 @@ function resetSettings() {
     lastCharFirstRadio.checked = true;
     lastCharFakeLabel.innerText = lastCharFirstRadio.value;
 
-    closeDetails();
+    closeSelect(firstCharFakeSelect);
+    closeSelect(lastCharFakeSelect);
 
     // Reset #length-input and #length-label
     lengthInput.value = 8;
@@ -178,8 +185,8 @@ settingsToggle.forEach((trigger) => {
     trigger.addEventListener("click", () => {
         settings.classList.toggle("active");
         modalBlur.classList.toggle("active");
-    })
-})
+    });
+});
 
 // Checkboxes
 upperCheck.addEventListener("input", () => {
@@ -221,27 +228,22 @@ lengthInput.addEventListener("input", () => {
     lengthLabel.textContent = `Length: ${maxLength}`;
 });
 
-window.addEventListener("click", (e) => {
-    if (e.target != firstCharFakeSelect || e.target != lastCharFakeSelect) {
-        closeDetails();
-    }
-});
-
 firstCharFirstRadio.addEventListener("click", () => {
     firstChar = "";
     firstCharFakeLabel.innerText = firstCharFirstRadio.value;
-    setTimeout(closeDetails, 400);
+    setTimeout(closeSelect(firstCharFakeSelect), 400);
 });
 
 lastCharFirstRadio.addEventListener("click", () => {
     lastChar = "";
     lastCharFakeLabel.innerText = lastCharFirstRadio.value;
-    setTimeout(closeDetails, 400);
+    setTimeout(closeSelect(lastCharFakeSelect), 400);
 });
 
 // Buttons
 doneBtn.addEventListener("click", () => {
-    closeDetails();
+    closeSelect(firstCharFakeSelect);
+    closeSelect(lastCharFakeSelect);
 })
 
 resetBtn.addEventListener("click", () => {
