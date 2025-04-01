@@ -10,10 +10,10 @@ const numbersCheck = document.getElementById("include-numbers");
 const specialCheck = document.getElementById("include-special");
 
 // Ranges
-const lengthLabel = document.getElementById("length-label");
-const lengthInput = document.getElementById("length-input");
-const passNumberLabel = document.getElementById("pass-number-label");
 const passNumberInput = document.getElementById("pass-number-input");
+const passNumberDisplay = document.querySelector(".pass-number-display");
+const lengthInput = document.getElementById("length-input");
+const lengthDisplay = document.querySelector(".length-display");
 
 // First character fake select
 const firstCharFakeLabel = document.getElementById("first-char-fake-label");
@@ -116,7 +116,7 @@ function createRadioElement(typeClass, positionClass, radioValue, name) {
     radio.classList.add("h--10");
     radio.classList.add("w--100");
     radio.classList.add("bd-rd--2");
-    radio.classList.add("bd--p-50-10_1_sd");
+    radio.classList.add("o--p-50_20");
     radio.classList.add("tr--a_out_2");
     radio.classList.add("cur--pointer");
     radio.value = radioValue;
@@ -158,24 +158,24 @@ function resetSettings() {
     hasNumbers = true;
     hasSpecial = true;
     
-    // Reset 'firstCharSelect' and 'lastCharSelect' options
+    // Reset binding characters
     firstCharFirstRadio.checked = true;
     firstCharFakeLabel.innerText = firstCharFirstRadio.value;
+    firstChar = "";
     lastCharFirstRadio.checked = true;
     lastCharFakeLabel.innerText = lastCharFirstRadio.value;
+    lastChar = "";
 
     closeSelect(firstCharFakeSelect);
     closeSelect(lastCharFakeSelect);
 
-    // Reset #length-input and #length-label
+    // Reset ranges
     lengthInput.value = 8;
     maxLength = lengthInput.value;
-    lengthLabel.textContent = `Length: ${maxLength}`;
-
-    // Reset #pass-number-input and #pass-number-label
+    lengthDisplay.textContent = maxLength;
     passNumberInput.value = 1;
     numberOfPass = passNumberInput.value;
-    passNumberLabel.textContent = `Passwords: ${numberOfPass}`;
+    passNumberDisplay.textContent = numberOfPass;
 }
 
 /* EVENTS
@@ -220,12 +220,12 @@ specialCheck.addEventListener("input", () => {
 // Ranges
 passNumberInput.addEventListener("input", () => {
     numberOfPass = passNumberInput.value;
-    passNumberLabel.textContent = `Passwords: ${numberOfPass}`;
+    passNumberDisplay.textContent = numberOfPass;
 });
 
 lengthInput.addEventListener("input", () => {
     maxLength = lengthInput.value;
-    lengthLabel.textContent = `Length: ${maxLength}`;
+    lengthDisplay.textContent = maxLength;
 });
 
 firstCharFirstRadio.addEventListener("click", () => {

@@ -114,6 +114,11 @@
     padding: var(--s-2x) var(--s-3x);
 }
 
+/* MARGIN */
+.m-b--3 {
+    margin-bottom: var(--s-3x);
+}
+
 /* BACKGROUND */
 .b--p-5 {
     background-color: var(--primary-5);
@@ -151,8 +156,16 @@
 }
 
 /* BORDER */
-.bd--p-50-10_1_sd {
-    border: var(--primary-50_10) 1px solid;
+.o--p-50_20 {
+    outline: 1px solid var(--primary-50_20);
+
+    &:focus {
+        outline-color: var(--primary-50_60);
+    }
+
+    &:not(ul, .btn-cont, .modal):hover {
+        outline-color: var(--primary-50_40);
+    }
 }
 
 /* BORDER RADIUS */
@@ -354,6 +367,9 @@
 /* Flexbox */
 .f-d--col {
     flex-direction: column;
+}
+.f--1 {
+    flex: 1;
 }
 .al-i--center {
     align-items: center;

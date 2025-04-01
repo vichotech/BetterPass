@@ -150,9 +150,9 @@ function genPassword() {
     passBtn.classList.add("c--p-50");
     passBtn.classList.add("b--p-10-30");
     passBtn.classList.add("bdp-f--blur-1");
-    passBtn.classList.add("bd--p-50-10_1_sd");
+    passBtn.classList.add("o--p-50_20");
     passBtn.classList.add("bd-rd--2");
-    passBtn.classList.add("tr--a_out_4");
+    passBtn.classList.add("tr--a_out_2");
     passBtn.classList.add("cur--pointer");
 
     const copyIcon = document.createElement("div");
